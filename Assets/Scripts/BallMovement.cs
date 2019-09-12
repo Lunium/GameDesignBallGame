@@ -5,8 +5,12 @@ using UnityEngine;
 public class BallMovement : MonoBehaviour {
 
     public float speed;
-
+    
+    private int score;
     private Rigidbody rb;
+
+    public delegate void ScoreComplete();
+    public static event ScoreComplete OnScoreComplete;
 
     void Start ()
     {
@@ -15,6 +19,10 @@ public class BallMovement : MonoBehaviour {
 
     void FixedUpdate ()
     {
+        if (score >= 4) {
+            OnScoreComplete();
+        }
+
         float moveHorizontal = Input.GetAxis ("Horizontal");
         float moveVertical = Input.GetAxis ("Vertical");
 
@@ -27,6 +35,7 @@ public class BallMovement : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Pick Up"))
         {
+            score++;
             other.gameObject.SetActive(false);
         }
     }
