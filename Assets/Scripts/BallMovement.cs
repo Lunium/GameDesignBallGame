@@ -6,7 +6,7 @@ public class BallMovement : MonoBehaviour {
 
     public float speed;
     
-    private int score;
+    public int score;
     private Rigidbody rb;
 
     public delegate void ScoreComplete();
